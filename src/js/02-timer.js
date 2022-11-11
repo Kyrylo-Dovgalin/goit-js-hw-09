@@ -14,7 +14,7 @@ const options = {
     selectedDateMs = selectedDates[0].getTime();
 
     if (selectedDateMs < new Date()) {
-      // alert('Please choose a date in the future');
+      Notiflix.Notify.init({ position: 'center-top' });
       Notiflix.Notify.failure('Please choose a date in the future');
       refs.startBtn.disabled = refs.startBtn.disabled
         ? refs.startBtn.disabled
@@ -64,11 +64,11 @@ function updateTimerFields({
   hours = '00',
   minutes = '00',
   seconds = '00',
-}) {
-  refs.daysField.textContent = days;
-  refs.hoursField.textContent = hours;
-  refs.minutesField.textContent = minutes;
-  refs.secondsFields.textContent = seconds;
+} = {}) {
+  refs.daysField.textContent = addLeadingZero(days);
+  refs.hoursField.textContent = addLeadingZero(hours);
+  refs.minutesField.textContent = addLeadingZero(minutes);
+  refs.secondsFields.textContent = addLeadingZero(seconds);
 }
 
 function convertMs(ms) {
@@ -91,6 +91,6 @@ function convertMs(ms) {
   return { days, hours, minutes, seconds };
 }
 
-// addLeadingZero(value){
-//     padStart();
-//  }
+function addLeadingZero(value) {
+  return String(value).padStart(2, '0');
+}
